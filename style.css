@@ -17,9 +17,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -1646,8 +1648,13 @@ footer {
     max-width: none;
     text-align: center;
   }
+  .hero-badge {
+    margin: 0 auto 24px;
+  }
   .hero h1 {
-    letter-spacing: -1.8px;
+    font-size: 42px;
+    letter-spacing: -1.2px;
+    line-height: 1.05;
   }
   .hero::before {
     display: none;
@@ -1682,7 +1689,8 @@ footer {
   }
   .hero-panel-top {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
   }
   .hero-phone {
     width: 210px;
@@ -1693,6 +1701,7 @@ footer {
     position: static;
     width: auto;
     margin-top: 14px;
+    text-align: center;
   }
   .scroll-cue {
     margin: 0 auto;
@@ -1710,18 +1719,53 @@ footer {
   }
   .section {
     padding: 64px 20px;
+    text-align: center;
+  }
+  .section-label {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-sub {
+    margin-left: auto;
+    margin-right: auto;
   }
   .features {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 16px;
+  }
+  .card {
+    text-align: center;
+  }
+  .card-icon {
+    margin-left: auto;
+    margin-right: auto;
   }
   .how-grid {
     grid-template-columns: 1fr;
     gap: 36px;
+    text-align: center;
+  }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .step {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .step-left {
+    margin-bottom: 12px;
+  }
+  .step-line {
+    display: none;
   }
   .phone-wrap {
     order: -1;
     position: static;
+    margin: 0 auto;
   }
   .phone {
     width: 170px;
@@ -1730,15 +1774,33 @@ footer {
   .privacy-grid {
     grid-template-columns: 1fr;
   }
+  .privacy-item {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .privacy-x {
+    margin-bottom: 12px;
+  }
   .github-cta {
     padding: 28px 24px;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+  .github-cta-left p {
+    margin: 0 auto 20px;
   }
   footer {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 24px 20px;
+    align-items: center;
+    text-align: center;
+    padding: 32px 20px;
+    gap: 16px;
+  }
+  .footer-links {
+    justify-content: center;
+    width: 100%;
   }
 }
 
@@ -1826,4 +1888,161 @@ footer {
   .card {
     transition: none !important;
   }
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50px;
+  padding: 12px 24px 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  z-index: 1000;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+.whatsapp-btn svg {
+  width: 24px;
+  height: 24px;
+}
+.whatsapp-btn:hover {
+  background-color: #128C7E;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+}
+@media (max-width: 768px) {
+  .whatsapp-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px;
+    border-radius: 50%;
+  }
+  .whatsapp-btn span {
+    display: none;
+  }
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 20px;
+}
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-content {
+  background: var(--bg);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 440px;
+  width: 100%;
+  position: relative;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+.modal-overlay.show .modal-content {
+  transform: translateY(0) scale(1);
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: var(--muted);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+}
+.modal-close:hover {
+  background: var(--border-soft);
+  color: var(--fg);
+}
+.modal-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--accent-dim);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin: 0 auto 20px;
+}
+.modal-icon svg {
+  width: 28px;
+  height: 28px;
+}
+.modal-content h2 {
+  text-align: center;
+  font-family: "Syne", sans-serif;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+.modal-content p {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.install-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+  background: var(--border-soft);
+  padding: 16px;
+  border-radius: 12px;
+}
+.install-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  color: var(--fg);
+}
+.step-badge {
+  background: var(--accent);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.modal-btn {
+  width: 100%;
+  justify-content: center;
 }
