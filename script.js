@@ -21,9 +21,14 @@ function isDesktopMotion() {
 }
 
 window.onload = () => {
-  // Show android view always for web preview; restrict on real deployment
-  document.getElementById("android").style.display = "block";
-  document.getElementById("unsupported").style.display = "none";
+  if (isAndroid) {
+    document.getElementById("android").style.display = "block";
+    document.getElementById("unsupported").style.display = "none";
+  } else {
+    document.getElementById("android").style.display = "none";
+    document.getElementById("unsupported").style.display = "block";
+    return; // Stop animations from running on the unsupported screen
+  }
 
   requestAnimationFrame(() => {
     document.querySelectorAll(".anim").forEach((el) => el.classList.add("go"));
