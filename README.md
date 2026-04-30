@@ -1,4 +1,4 @@
-###🚀 AnonPro v1.0 — First Public Release###
+### 🚀 AnonPro v1.0 — First Public Release ###
 
 AnonPro is a sleek privacy-first social platform built for free expression, real-time interaction, and anonymous communication.
 
