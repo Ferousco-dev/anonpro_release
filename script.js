@@ -35,11 +35,48 @@ window.onload = () => {
   initHeroMotion();
   initScrollParallax();
   initMagneticHover();
+  fetchDownloadCount();
 };
 
+async function fetchDownloadCount() {
+  try {
+    const res = await fetch("https://api.counterapi.dev/v1/anonpro/downloads/");
+    const data = await res.json();
+    const countEl = document.getElementById("live-download-count");
+    if (countEl && data.count !== undefined) {
+      countEl.dataset.count = data.count;
+      countEl.textContent = data.count;
+    }
+  } catch (err) {
+    console.error("Failed to fetch download count", err);
+  }
+}
+
 function downloadApp() {
-  window.location.href =
+  const modal = document.getElementById("download-modal");
+  if (modal) {
+    modal.classList.add("show");
+  }
+
+  // Increment download count silently
+  fetch("https://api.counterapi.dev/v1/anonpro/downloads/up").catch(() => {});
+
+  // Trigger download in the background without redirecting
+  const link = document.createElement("a");
+  link.href =
     "https://github.com/Ferousco-dev/anonpro_release/releases/download/v1.0.0/app-release.apk";
+  link.download = "anonpro-release.apk";
+  link.target = "_blank";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function closeDownloadModal() {
+  const modal = document.getElementById("download-modal");
+  if (modal) {
+    modal.classList.remove("show");
+  }
 }
 
 /* FAQ */
