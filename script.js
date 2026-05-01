@@ -69,8 +69,8 @@ function downloadApp() {
   // Trigger download in the background without redirecting
   const link = document.createElement("a");
   link.href =
-    "https://github.com/Ferousco-dev/anonpro_release/releases/download/v1.0.0/app-release.apk";
-  link.download = "anonpro-release.apk";
+    "https://github.com/Ferousco-dev/anonpro_release/releases/download/v1.0.0/AnonPro.apk";
+  link.download = "AnonPro.apk";
   link.target = "_blank";
   document.body.appendChild(link);
   link.click();
